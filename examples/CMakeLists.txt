@@ -21,12 +21,19 @@ target_compile_options(example PRIVATE
 target_compile_features(example PRIVATE cxx_std_14)
 
 # SFML 
-
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules" ${CMAKE_MODULE_PATH})
-find_package(SFML 2.4 REQUIRED graphics window system)
-if(SFML_FOUND)
-    target_include_directories(example PRIVATE ${SFML_INCLUDE_DIR})
-    target_link_libraries(example PRIVATE ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-else()
-    message(FATAL_ERROR "SFML not found")
-endif()
+include(FetchContent)
+FetchContent_Declare(
+        SFML
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG 2.5.1
+)
+set(BUILD_SHARED_LIBS OFF)
+set(SFML_BUILD_EXAMPLES OFF)
+set(SFML_BUILD_DOC OFF)
+set(SFML_BUILD_NETWORK OFF)
+set(SFML_BUILD_AUDIO OFF)
+set(SFML_BUILD_GRAPHICS ON)
+set(SFML_BUILD_WINDOW ON)
+FetchContent_MakeAvailable(SFML)
+target_include_directories(example PRIVATE ${SFML_INCLUDE_DIR})
+target_link_libraries(example PRIVATE ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})

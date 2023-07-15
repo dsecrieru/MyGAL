@@ -9,8 +9,8 @@ target_link_libraries(grid PRIVATE mygal)
 add_executable(circle circle.cpp)
 target_link_libraries(circle PRIVATE mygal)
 
-add_executable(random random.cpp)
-target_link_libraries(random PRIVATE mygal)
+add_executable(mygal_random random.cpp)
+target_link_libraries(mygal_random PRIVATE mygal)
 
 # Tests
 
@@ -27,5 +27,5 @@ foreach(n RANGE 2 100)
 endforeach()
 
 foreach(n RANGE 2 100)
-    add_test(NAME "random${n}" COMMAND random ${n})
+    add_test(NAME "random${n}" COMMAND mygal_random ${n})
 endforeach()
