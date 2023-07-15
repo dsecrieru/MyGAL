@@ -4,7 +4,7 @@ add_executable(example main.cpp)
 target_link_libraries(example PRIVATE mygal)
 target_compile_options(example PRIVATE 
     -Wall 
-    -Wextra 
+#    -Wextra
     -Wnon-virtual-dtor
     -Wold-style-cast
     -Wcast-align
